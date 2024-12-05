@@ -1,0 +1,82 @@
+
+    private Integer ataque;
+    private Integer defesa;
+    private Integer velocidade;
+    private Integer resistencia;
+
+==============================================
+
+public void realizarPrimeiroAtaque() {
+    primeiroAtacante.atacar(segundoAtacante);
+}
+
+public void realizarSegundoAtaque() {
+    segundoAtacante.atacar(primeiroAtacante);
+}
+
+==============================================
+
+
+
+==============================================
+
+public void setVida(Integer vida) {
+    this.vida = vida;
+}
+
+public void atacar(Personagem defensor) {
+    int danoBase = this.calcularDanoBase();
+
+    int danoInfrigido = danoBase + this.getAtaque() - defensor.getDefesa();
+
+    // Logica de dano critico
+    int randomico = random.nextInt(1, 101);
+    if (randomico <= 10) {
+        danoInfrigido *= 1.5;
+    }
+
+    defensor.receberDano(danoInfrigido);
+}
+
+private void receberDano(int danoInfrigido) {
+    this.vida -= danoInfrigido;
+}
+
+public void calcularDanoBase() {
+    final SecureRandom random = new SecureRandom();
+
+    int danoBaseMin = (int) Math.round(0.8d * this.ataque);
+    int danoBaseMax = (int) Math.round(1.2d * this.ataque);
+
+    int danoBase = new SecureRandom().nextInt(danoBaseMin, 1 + danoBaseMax);
+
+    return danoBase;
+}
+
+==============================================
+
+@Test
+void testBuilder() {
+    Personagem p = new Assassino(1, 1, 1, 1)
+    Integer ataque = 4;
+    Integer defesa = 4;
+    Integer velocidade = 4;
+    Integer resistencia = 4;
+
+    Personagem assassino = contruaUmPersonagem().umAssassinoValido();
+
+    Personagem assassino = contruaUmPersonagem().comAtaque(ataque).comDefesa(defesa).umAssassinoValido();
+}
+
+@Test
+void testeDanoBase() {
+    Personagem assassino = contruaUmPersonagem().comAtaque(4).comDefesa(4).umAssassinoValido();
+
+    int danoCalculado = assassino.calcularDanoBase();
+    //Integer danoEsperado = 10;
+
+    assertTrue(danoCalculado >= 6);
+    assertTrue(danoCalculado >= 8);
+
+    //assertEquals(danoEsperado, danoCalculado);
+}
