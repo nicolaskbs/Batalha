@@ -1,5 +1,7 @@
 package batalha;
 
+import java.security.SecureRandom;
+
 public abstract class Personagem {
 	private Integer ataque;
 
@@ -53,19 +55,23 @@ public abstract class Personagem {
 	}
 
 	int calcularDanoInfringindo(int danoBase, int defesa, boolean eGolpeCritico) {
-		// TODO
-		return -1;
+		int danoInfringido = danoBase + this.getAtaque() - defesa;
+		return danoInfringido;
 	}
 
 	private void receberDano(int danoInfringido) {
-		// TODO
+		this.vida -= danoInfringido;
 	}
 
 	public int calcularDanoBase(double modificadorAtaque) {
-		// TODO Considere que o modificadorAtaque é um valor entre [0.8 e 1.2[
-		// 		Ele serve de base pra calcular o danoBase
-		//		Recebe como parâmetro para isolar melhor o método, facilitando seu teste
-		return -1;
+		final SecureRandom random = new SecureRandom();
+
+		int danoBaseMin = (int) Math.round(0.8d * this.ataque);
+		int danoBaseMax = (int) Math.round(1.2d * this.ataque);
+
+		int danoBase = new SecureRandom().nextInt(danoBaseMin, 1 + danoBaseMax);
+
+		return danoBase;
 	}
 	
 	public Integer getAtaque() {
