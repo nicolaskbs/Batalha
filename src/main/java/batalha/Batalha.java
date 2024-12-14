@@ -53,17 +53,13 @@ public class Batalha {
 			// Informar que evadiu
 		}
 		else {
-			double modificadorAtaque = 0.8 + (geradorRandomico.nextDouble() * (0.4));
-			boolean eGolpeCritico = geradorRandomico.nextInt(1, 101) <= 10;
-			
-			atacante.atacar(defensor, modificadorAtaque, eGolpeCritico);
+			atacante.atacar(defensor);
 		}
 	}
 
 	boolean evadiu(int chanceEvasao, int randomico) {
 		return randomico <= chanceEvasao;
 	}
-	
 
 	int calcularChanceEvasao(Personagem atacante, Personagem defensor) {
 		return Batalha.calcularChanceEvasao(atacante.getVelocidade(), defensor.getVelocidade());
@@ -75,7 +71,14 @@ public class Batalha {
 	}
 
 	public boolean temVencedor() {
-		// TODO implementar a lógica
+		if (primeiroAtacante.getVida() <= 0) {
+			System.out.println("O vencedor é: " + segundoAtacante.getClass().getSimpleName());
+			return true;
+		} else if (segundoAtacante.getVida() <= 0) {
+			System.out.println("O vencedor é: " + primeiroAtacante.getClass().getSimpleName());
+			return true;
+		}
+
 		return false;
 	}
 

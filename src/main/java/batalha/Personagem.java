@@ -39,7 +39,9 @@ public abstract class Personagem {
 	}
 
 	final void checarValorMinimo(Integer atributo) {
-		// TODO
+		if (atributo < 3){
+			throw new IllegalStateException("Atributo não pode ser menor que 3.");
+		}
 	}
 
 	final void checarTotal() {
@@ -48,22 +50,41 @@ public abstract class Personagem {
 		}
 	}
 
-	public void atacar(Personagem defensor, double modificadorAtaque, boolean eGolpeCritico) {
-		int danoBase = this.calcularDanoBase(modificadorAtaque);
-		int dano = this.calcularDanoInfringindo(danoBase, defensor.getDefesa(), eGolpeCritico);
+	public void atacar(Personagem defensor) {
+		int dano = this.calcularDano(defensor.getDefesa());
 		defensor.receberDano(dano);
 	}
 
-	int calcularDanoInfringindo(int danoBase, int defesa, boolean eGolpeCritico) {
-		int danoInfringido = danoBase + this.getAtaque() - defesa;
-		return danoInfringido;
+	int calcularDano(int defesa) {
+		int danoBase = this.calcularDanoBase();
+		int dano = danoBase + this.getAtaque() - defesa;
+
+		// Aplicar dano critico
+		dano = verificarDanoCritico(dano);
+
+		// Verificar menor que 1
+		if (dano < 1) {
+			dano = 1;
+		}
+
+		return dano;
 	}
 
-	private void receberDano(int danoInfringido) {
-		this.vida -= danoInfringido;
+	int verificarDanoCritico(int dano){
+		final SecureRandom random = new SecureRandom();
+		boolean eGolpeCritico = random.nextInt(1, 101) <= 10;
+		if (eGolpeCritico) {
+			dano *= 1.5;
+		}
+
+		return dano;
 	}
 
-	public int calcularDanoBase(double modificadorAtaque) {
+	private void receberDano(int dano) {
+		this.vida -= dano;
+	}
+
+	public int calcularDanoBase() {
 		final SecureRandom random = new SecureRandom();
 
 		int danoBaseMin = (int) Math.round(0.8d * this.ataque);
