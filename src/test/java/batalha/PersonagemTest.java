@@ -1,11 +1,30 @@
 package batalha;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 class PersonagemTest {
+
+	@Test
+	void testeChecarValorMinimo() {
+		// Inicializar personagem
+		Personagem p = new Personagem() {
+			@Override
+			void checarRegraDeClasse() {
+				// Deixado em branco de propósito
+			}
+		};
+		p.setAtaque(7);
+		p.setDefesa(3);
+		p.setResistencia(3);
+		p.setVelocidade(7);
+
+		assertThrows(IllegalStateException.class, ()->p.checarValorMinimo(3));
+	}
 	
 	@Test
 	void testeChecarTotalIgualA20_NaoLancaExcecao() {
@@ -74,20 +93,24 @@ class PersonagemTest {
 	}
 
 	@Test
-	void testeChecarValorMinimo() {
-		// Inicializar personagem
-		Personagem p = new Personagem() {
+	void testeCalcularDanoBase() {
+		// Inicializar personagem atacante
+		Personagem p1 = new Personagem() {
 			@Override
 			void checarRegraDeClasse() {
 				// Deixado em branco de propósito
 			}
 		};
-		p.setAtaque(7);
-		p.setDefesa(3);
-		p.setResistencia(3);
-		p.setVelocidade(7);
+		p1.setAtaque(7);
+		p1.setDefesa(3);
+		p1.setResistencia(3);
+		p1.setVelocidade(7);
 
-		assertThrows(IllegalStateException.class, ()->p.checarValorMinimo(3));
+		// Verificar dano
+		int dano = p1.calcularDanoBase();
+		boolean danoCorreto = dano >= 5 && dano <= 8;
+
+		assertTrue(danoCorreto);
 	}
 
 }
