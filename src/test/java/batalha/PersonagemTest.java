@@ -2,7 +2,6 @@ package batalha;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -73,4 +72,22 @@ class PersonagemTest {
 		
 		assertThrows(IllegalStateException.class, ()->p.checarTotal());
 	}
+
+	@Test
+	void testeChecarValorMinimo() {
+		// Inicializar personagem
+		Personagem p = new Personagem() {
+			@Override
+			void checarRegraDeClasse() {
+				// Deixado em branco de propósito
+			}
+		};
+		p.setAtaque(7);
+		p.setDefesa(3);
+		p.setResistencia(3);
+		p.setVelocidade(7);
+
+		assertThrows(IllegalStateException.class, ()->p.checarValorMinimo(3));
+	}
+
 }
