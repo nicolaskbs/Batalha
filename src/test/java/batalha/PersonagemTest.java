@@ -93,6 +93,26 @@ class PersonagemTest {
 	}
 
 	@Test
+	void testeVerificarDanoCritico() {
+		// Inicializar personagem atacante
+		Personagem p1 = new Personagem() {
+			@Override
+			void checarRegraDeClasse() {
+				// Deixado em branco de propósito
+			}
+		};
+		p1.setAtaque(7);
+		p1.setDefesa(3);
+		p1.setResistencia(3);
+		p1.setVelocidade(7);
+
+		// Verificar dano
+		int dano = p1.verificarDanoCritico(7);
+
+		assertTrue(dano == 7 || dano == 10);
+	}
+
+	@Test
 	void testeCalcularDanoBase() {
 		// Inicializar personagem atacante
 		Personagem p1 = new Personagem() {
