@@ -1,4 +1,4 @@
-package batalha;
+package main.java.batalha;
 
 public class Guerreiro extends Personagem {
 
@@ -7,7 +7,7 @@ public class Guerreiro extends Personagem {
 	}
 
 	@Override
-	final void checarRegraDeClasse() {
+	final protected void checarRegraDeClasse() {
 		// TODO Auto-generated method stub
 	}
 

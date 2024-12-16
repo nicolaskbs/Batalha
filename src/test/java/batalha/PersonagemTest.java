@@ -1,5 +1,6 @@
-package batalha;
+package test.java.batalha;
 
+import main.java.batalha.Personagem;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,100 +12,65 @@ class PersonagemTest {
 
 	@Test
 	void testeChecarValorMinimo() {
-		// Inicializar personagem
-		Personagem p = new Personagem() {
-			@Override
-			void checarRegraDeClasse() {
-				// Deixado em branco de propósito
-			}
-		};
-		p.setAtaque(7);
-		p.setDefesa(3);
-		p.setResistencia(3);
-		p.setVelocidade(7);
 
-		assertThrows(IllegalStateException.class, ()->p.checarValorMinimo(3));
+		assertThrows(IllegalStateException.class, () -> {
+			new Personagem(7, 3, 3, 7) {
+				@Override
+				protected void checarRegraDeClasse() {
+					// Deixado em branco de propósito
+				}
+			};
+		});
 	}
 	
 	@Test
 	void testeChecarTotalIgualA20_NaoLancaExcecao() {
-		Personagem p = new Personagem() {
-			@Override
-			void checarRegraDeClasse() {
-				// Deixado em branco de propósito
-			}
-		};
-		
-		Integer ataque = 7;
-		Integer defesa = 6;
-		Integer velocidade = 4;
-		Integer resistencia = 3;
-		
-		p.setAtaque(ataque);
-		p.setDefesa(defesa);
-		p.setResistencia(resistencia);
-		p.setVelocidade(velocidade);
-		
-		assertDoesNotThrow(()->p.checarTotal());
+
+		assertDoesNotThrow( () -> {
+			new Personagem(7,6,4,3) {
+				@Override
+				protected void checarRegraDeClasse() {
+					// Deixado em branco de propósito
+				}
+			};
+		});
 	}
 	
 	@Test
 	void testeChecarTotalIgualA19_LancaExcecao() {
-		Personagem p = new Personagem() {
-			@Override
-			void checarRegraDeClasse() {
-				// Deixado em branco de propósito
-			}
-		};
-		
-		Integer ataque = 7;
-		Integer defesa = 5;
-		Integer velocidade = 4;
-		Integer resistencia = 3;
-		
-		p.setAtaque(ataque);
-		p.setDefesa(defesa);
-		p.setResistencia(resistencia);
-		p.setVelocidade(velocidade);
-		
-		assertThrows(IllegalStateException.class, ()->p.checarTotal());
+
+		assertThrows(IllegalStateException.class, () -> {
+			new Personagem(7,5,4,3) {
+				@Override
+				protected void checarRegraDeClasse() {
+					// Deixado em branco de propósito
+				}
+			};
+		});
 	}
 	
 	@Test
 	void testeChecarTotalIgualA21_LancaExcecao() {
-		Personagem p = new Personagem() {
-			@Override
-			void checarRegraDeClasse() {
-				// Deixado em branco de propósito
-			}
-		};
 		
-		Integer ataque = 9;
-		Integer defesa = 5;
-		Integer velocidade = 4;
-		Integer resistencia = 3;
-		
-		p.setAtaque(ataque);
-		p.setDefesa(defesa);
-		p.setResistencia(resistencia);
-		p.setVelocidade(velocidade);
-		
-		assertThrows(IllegalStateException.class, ()->p.checarTotal());
+		assertThrows(IllegalStateException.class, () -> {
+			new Personagem(9, 5, 4, 3) {
+				@Override
+				protected void checarRegraDeClasse() {
+					// Deixado em branco de propósito
+				}
+			};
+		});
 	}
 
 	@Test
 	void testeVerificarDanoCritico() {
 		// Inicializar personagem atacante
-		Personagem p1 = new Personagem() {
+		Personagem p1 = new Personagem(7, 3, 3, 7) {
 			@Override
-			void checarRegraDeClasse() {
+			protected void checarRegraDeClasse() {
 				// Deixado em branco de propósito
 			}
 		};
-		p1.setAtaque(7);
-		p1.setDefesa(3);
-		p1.setResistencia(3);
-		p1.setVelocidade(7);
 
 		// Verificar dano
 		int dano = p1.verificarDanoCritico(7);
@@ -115,16 +81,13 @@ class PersonagemTest {
 	@Test
 	void testeCalcularDanoBase() {
 		// Inicializar personagem atacante
-		Personagem p1 = new Personagem() {
+		Personagem p1 = new Personagem(7, 3, 3, 7) {
 			@Override
-			void checarRegraDeClasse() {
+			protected void checarRegraDeClasse() {
 				// Deixado em branco de propósito
 			}
+
 		};
-		p1.setAtaque(7);
-		p1.setDefesa(3);
-		p1.setResistencia(3);
-		p1.setVelocidade(7);
 
 		// Verificar dano
 		int dano = p1.calcularDanoBase();

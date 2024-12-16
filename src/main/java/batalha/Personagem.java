@@ -1,4 +1,4 @@
-package batalha;
+package main.java.batalha;
 
 import java.security.SecureRandom;
 
@@ -29,7 +29,7 @@ public abstract class Personagem {
 		this.vida = 5 * this.resistencia;
 	}
 
-	abstract void checarRegraDeClasse();
+	abstract protected void checarRegraDeClasse();
 
 	private void checarValorMinimo() {
 		checarValorMinimo(ataque);
@@ -84,7 +84,7 @@ public abstract class Personagem {
 		this.vida -= dano;
 	}
 
-	public int calcularDanoBase() {
+	protected int calcularDanoBase() {
 		final SecureRandom random = new SecureRandom();
 
 		int danoBaseMin = (int) Math.round(0.8d * this.ataque);
@@ -99,7 +99,7 @@ public abstract class Personagem {
 		return ataque;
 	}
 
-	void setAtaque(Integer ataque) {
+	protected void setAtaque(Integer ataque) {
 		this.ataque = ataque;
 	}
 
@@ -107,7 +107,7 @@ public abstract class Personagem {
 		return defesa;
 	}
 
-	void setDefesa(Integer defesa) {
+	protected void setDefesa(Integer defesa) {
 		this.defesa = defesa;
 	}
 
@@ -115,7 +115,7 @@ public abstract class Personagem {
 		return velocidade;
 	}
 
-	void setVelocidade(Integer velocidade) {
+	protected void setVelocidade(Integer velocidade) {
 		this.velocidade = velocidade;
 	}
 
@@ -123,7 +123,7 @@ public abstract class Personagem {
 		return resistencia;
 	}
 
-	void setResistencia(Integer resistencia) {
+	protected void setResistencia(Integer resistencia) {
 		this.resistencia = resistencia;
 	}
 
@@ -131,7 +131,7 @@ public abstract class Personagem {
 		return vida;
 	}
 
-	public void setVida(Integer vida) {
+	protected void setVida(Integer vida) {
 		this.vida = vida;
 	}
 }

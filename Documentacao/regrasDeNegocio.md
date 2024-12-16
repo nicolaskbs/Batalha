@@ -1,16 +1,3 @@
-- Personagem pode ser guerreiro ou assassino
-
-
-- Construir um personagem:
-    - Partição guerreiro
-    - Partição assassino
-    - Partição NÃO É personagem
-
-
--Tabela de dispersão =
-Condição/ação
-
-
 ## Tabelas de Dispersão para Construção do Personagem
 
 
