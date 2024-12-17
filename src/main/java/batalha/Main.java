@@ -8,8 +8,6 @@ public class Main {
 		Personagem p1 = new Guerreiro(7, 3, 3, 7);
 		Personagem p2 = new Assassino(7, 3, 7, 3);
 
-		Batalha batalha = new Batalha(p1, p2);
-
 		Scanner scanner = new Scanner(System.in);
 
 		// Escolher personagem
@@ -60,21 +58,30 @@ public class Main {
 		}
 		System.out.println("O personagem escolhido é: " + classe);
 		System.out.println("Os atributos foram distribuidos da seguinte forma " +
-			"\n Ataque: " + p1.getAtaque() +
-			"\n Defesa: " + p1.getDefesa() +
-			"\n Velocidade: " + p1.getVelocidade() +
-			"\n Resistência: " + p1.getResistencia()
+			"\nAtaque: " + p1.getAtaque() +
+			"\nDefesa: " + p1.getDefesa() +
+			"\nVelocidade: " + p1.getVelocidade() +
+			"\nResistência: " + p1.getResistencia()
 		);
 
 		// Jogar
+		Batalha batalha = new Batalha(p1, p2);
+
+		System.out.println("O jogador 1 é: " + batalha.getPrimeiroAtacante());
+		System.out.println("O jogador 2 é: " + batalha.getSegundoAtacante());
+
 		while (true) {
 			batalha.realizarPrimeiroAtaque();
+
+			System.out.println("Jogador 1 atacou!\nVida do jogador 2: " + batalha.getSegundoAtacante().getVida());
 
 			if (batalha.temVencedor()) {
 				break;
 			}
 
 			batalha.realizarSegundoAtaque();
+
+			System.out.println("Jogador 2 atacou!\nVida do jogador 1: " + batalha.getPrimeiroAtacante().getVida());
 
 			if (batalha.temVencedor()) {
 				break;
