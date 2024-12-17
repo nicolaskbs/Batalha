@@ -50,7 +50,7 @@ public class Batalha {
 		
 		
 		if(this.evadiu(chanceEvasao, randomicoEvasao)) {
-			// Informar que evadiu
+			System.out.println("Ataque evadido");
 		}
 		else {
 			atacante.atacar(defensor);

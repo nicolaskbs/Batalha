@@ -22,6 +22,7 @@ public abstract class Personagem {
 		this.velocidade = velocidade;
 		this.resistencia = resistencia;
 
+		// Checar regras
 		checarTotal();
 		checarValorMinimo();
 		checarRegraDeClasse();
