@@ -8,7 +8,15 @@ public class Guerreiro extends Personagem {
 
 	@Override
 	final protected void checarRegraDeClasse() {
-		// TODO Auto-generated method stub
+		if (this.getAtaque() != this.getResistencia()) {
+			throw new IllegalStateException("Ataque e Resistencia devem ser iguais.");
+		}
+		if (this.getDefesa() > this.getAtaque()) {
+			throw new IllegalStateException("Defesa não pode ser maior que Ataque.");
+		}
+		if (this.getVelocidade() > this.getAtaque()) {
+			throw new IllegalStateException("Velocidade não pode ser maior que Ataque.");
+		}
 	}
 
 }
