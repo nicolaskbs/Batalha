@@ -1,6 +1,6 @@
-package test.java.batalha;
+package batalha;
 
-import main.java.batalha.Personagem;
+//import batalha.Personagem;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,7 +14,7 @@ class PersonagemTest {
 	void testeChecarValorMinimo() {
 
 		assertThrows(IllegalStateException.class, () -> {
-			new Personagem(7, 3, 3, 7) {
+			new Personagem(7, 2, 3, 7) {
 				@Override
 				protected void checarRegraDeClasse() {
 					// Deixado em branco de propósito

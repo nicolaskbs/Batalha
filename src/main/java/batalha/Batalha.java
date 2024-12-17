@@ -1,4 +1,4 @@
-package main.java.batalha;
+package batalha;
 
 import static java.lang.Math.min;
 

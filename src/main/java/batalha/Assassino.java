@@ -1,4 +1,4 @@
-package main.java.batalha;
+package batalha;
 
 public class Assassino extends Personagem {
 
