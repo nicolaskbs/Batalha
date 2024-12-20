@@ -7,27 +7,36 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class PersonagemTest {
 
-	@Test
-	void testeChecarValorMinimo() {
+	@ParameterizedTest
+	@CsvSource({
+			"5, 5, 5, 4", // soma resulta em 19
+			"5, 5, 5, 6" // soma resulta em 21
+	})
+	void testeSomaTotal_LancaExcecao(Integer ataque,
+									 Integer defesa,
+									 Integer velocidade,
+									 Integer resistencia) {
 
-		assertThrows(IllegalStateException.class, () -> {
-			new Personagem(7, 2, 3, 7) {
+		assertThrows(IllegalStateException.class, () ->
+			new Personagem(ataque,defesa,velocidade,resistencia) {
 				@Override
 				protected void checarRegraDeClasse() {
 					// Deixado em branco de propósito
 				}
-			};
-		});
+			}
+		);
 	}
-	
+
 	@Test
-	void testeChecarTotalIgualA20_NaoLancaExcecao() {
+	void testeSomaTotal_NAOLancaExcecao() {
 
 		assertDoesNotThrow( () -> {
-			new Personagem(7,6,4,3) {
+			new Personagem(5,5,5,5) {
 				@Override
 				protected void checarRegraDeClasse() {
 					// Deixado em branco de propósito
@@ -35,25 +44,47 @@ class PersonagemTest {
 			};
 		});
 	}
-	
-	@Test
-	void testeChecarTotalIgualA19_LancaExcecao() {
 
-		assertThrows(IllegalStateException.class, () -> {
-			new Personagem(7,5,4,3) {
+	@ParameterizedTest
+	@CsvSource({
+			"2, 6, 6, 6", // Ataque 2
+			"6, 2, 6, 6", // Defesa 2
+			"6, 6, 2, 6", // Velocidade 2
+			"6, 6, 6, 2"  // Resistência 2
+	})
+	void testeValorMinimoAtributo_LancaExcecao(Integer ataque,
+											   Integer defesa,
+											   Integer velocidade,
+											   Integer resistencia) {
+
+		assertThrows(IllegalStateException.class, () ->
+			new Personagem(ataque, defesa, velocidade, resistencia) {
 				@Override
 				protected void checarRegraDeClasse() {
 					// Deixado em branco de propósito
 				}
-			};
-		});
+			}
+		);
 	}
-	
-	@Test
-	void testeChecarTotalIgualA21_LancaExcecao() {
-		
-		assertThrows(IllegalStateException.class, () -> {
-			new Personagem(9, 5, 4, 3) {
+
+	@ParameterizedTest
+	@CsvSource({
+			"3, 5, 6, 6",  // Ataque 3
+			"4, 5, 6, 5",  // Ataque 4
+			"6, 3, 5, 6",  // Defesa 3
+			"6, 4, 5, 5",  // Defesa 4
+			"6, 6, 3, 5",  // Velocidade 3
+			"6, 5, 4, 5",  // Velocidade 4
+			"6, 5, 6, 3",  // Resistência 3
+			"5, 5, 6, 4"   // Resistência 4
+	})
+	void testeValorMinimoAtributo_NAOLancaExcecao(Integer ataque,
+												  Integer defesa,
+												  Integer velocidade,
+												  Integer resistencia) {
+
+		assertDoesNotThrow( () -> {
+			new Personagem(ataque, defesa, velocidade, resistencia) {
 				@Override
 				protected void checarRegraDeClasse() {
 					// Deixado em branco de propósito
