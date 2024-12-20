@@ -93,6 +93,56 @@ class PersonagemTest {
 		});
 	}
 
+	@ParameterizedTest
+	@CsvSource({
+			"4, 4, 3, 9",  // Ataque = Defesa
+			"4, 3, 4, 9",  // Ataque = Velocidade
+			"9, 4, 3, 4",  // Resistencia = Defesa
+			"9, 3, 4, 4"  // Resistencia = Velocidade
+	})
+	void testeGuerreiro_LancaExcecao(Integer ataque,
+									 Integer defesa,
+									 Integer velocidade,
+									 Integer resistencia) {
+
+		assertThrows(IllegalStateException.class, () ->
+				new Guerreiro(ataque, defesa, velocidade, resistencia)
+		);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"4, 4, 3, 9",  // Ataque = Defesa
+			"4, 3, 9, 4",  // Ataque = Resistencia
+			"9, 4, 4, 3",  // Velocidade = Defesa
+			"9, 3, 4, 4"  // Velocidade = Resistencia
+	})
+	void testeAssassino_LancaExcecao(Integer ataque,
+									 Integer defesa,
+									 Integer velocidade,
+									 Integer resistencia) {
+
+		assertThrows(IllegalStateException.class, () ->
+				new Assassino(ataque, defesa, velocidade, resistencia)
+		);
+	}
+
+	@Test
+	void testeGuerreiro_NAOLancaExcecao() {
+
+		assertDoesNotThrow( () ->
+			new Guerreiro(7,3,4,6)
+		);
+	}
+
+	@Test
+	void testeAssassino_NAOLancaExcecao() {
+
+		assertDoesNotThrow( () ->
+				new Assassino(6,3,7,4)
+		);
+	}
+
 	@Test
 	void testeVerificarDanoCritico() {
 		// Inicializar personagem atacante
