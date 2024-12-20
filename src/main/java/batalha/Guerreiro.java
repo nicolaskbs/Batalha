@@ -8,14 +8,17 @@ public class Guerreiro extends Personagem {
 
 	@Override
 	final protected void checarRegraDeClasse() {
-		if (this.getAtaque() != this.getResistencia()) {
-			throw new IllegalStateException("Ataque e Resistencia devem ser iguais.");
+		if (this.getAtaque() <= this.getDefesa()) {
+			throw new IllegalStateException("Defesa NÃO deve ser MAIOR OU IGUAL que ataque.");
 		}
-		if (this.getDefesa() > this.getAtaque()) {
-			throw new IllegalStateException("Defesa não pode ser maior que Ataque.");
+		if (this.getAtaque() <= this.getVelocidade()) {
+			throw new IllegalStateException("Velocidade NÃO deve ser MAIOR OU IGUAL que Ataque.");
 		}
-		if (this.getVelocidade() > this.getAtaque()) {
-			throw new IllegalStateException("Velocidade não pode ser maior que Ataque.");
+		if (this.getResistencia() <= this.getDefesa()) {
+			throw new IllegalStateException("Defesa NÃO deve ser MAIOR OU IGUAL que Resistência.");
+		}
+		if (this.getResistencia() <= this.getVelocidade()) {
+			throw new IllegalStateException("Velocidade NÃO deve ser MAIOR OU IGUAL que Resistência.");
 		}
 	}
 
